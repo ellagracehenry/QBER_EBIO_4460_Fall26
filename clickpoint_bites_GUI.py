@@ -25,7 +25,7 @@ fps = 30  # Default FPS, will update dynamically based on video
 out_fps = 3 # Default temporal resolution for SAM2. 
 special_frame_start = 0  # Default starting frame for SAM2
 special_frame_interval = 10  # Default, will calculate dynamically
-ObjType = ["C. striatus + A. nigrofuscus"]  # Default fish family
+ObjType = ["C. sordidus + S. psittacus IP"]  # Default fish family
 orig_vid_width, orig_vid_height = 0, 0
 aspect_ratio = 1.78
 cap = None
@@ -375,7 +375,7 @@ def edit_selected():
     objid_entry.grid(row=2, column=1)
 
     Label(edit_win, text="ObjType:").grid(row=3, column=0)
-    objtype_options = ["C. striatus + A. nigrofuscus", "C. sordidus + S. psittacus IP", "Z. scopas", "A. triostegus", "TP Parrotfish", "Unicornfish", "UK Acanthurid", "UK IP Parrotfish"]
+    objtype_options = ["C. sordidus + S. psittacus IP", "C. striatus + A. nigrofuscus", "Z. scopas", "TP Parrotfish", "A. triostegus", "UK Acanthurid", "UK IP Parrotfish", "Unicornfish"]
     objtype_combo = ttk.Combobox(edit_win, values = objtype_options, state="readonly")
     objtype_combo.set(annotation["ObjType"])
     objtype_combo.grid(row=3, column=1)
@@ -422,30 +422,30 @@ def on_double_click(event):
 
 # Toggle Fish Family
 def toggle_obj_type():
-    if ObjType[0] == "C. striatus + A. nigrofuscus":
-        ObjType[0] = "C. sordidus + S. psittacus IP"
-        button_toggle_obj_type.configure(text="C. sordidus + S. psittacus IP")
-    elif ObjType[0] == "C. sordidus + S. psittacus IP":
+    if ObjType[0] == "C. sordidus + S. psittacus IP":
+        ObjType[0] = "C. striatus + A. nigrofuscus"
+        button_toggle_obj_type.configure(text="C. striatus + A. nigrofuscus")
+    elif ObjType[0] == "C. striatus + A. nigrofuscus":
         ObjType[0] = "Z. scopas"
         button_toggle_obj_type.configure(text="Z. scopas")
     elif ObjType[0] == "Z. scopas":
-        ObjType[0] = "A. triostegus"
-        button_toggle_obj_type.configure(text="A. triostegus")
-    elif ObjType[0] == "A. triostegus":
-        ObjType[0]="TP Parrotfish"
+        ObjType[0] = "TP Parrotfish"
         button_toggle_obj_type.configure(text="TP Parrotfish")
     elif ObjType[0] == "TP Parrotfish":
-        ObjType[0] = "Unicornfish"
-        button_toggle_obj_type.configure(text="Unicornfish")
-    elif ObjType[0] == "Unicornfish":
+        ObjType[0]="A. triostegus"
+        button_toggle_obj_type.configure(text="A. triostegus")
+    elif ObjType[0] == "A. triostegus":
         ObjType[0] = "UK Acanthurid"
         button_toggle_obj_type.configure(text="UK Acanthurid")
     elif ObjType[0] == "UK Acanthurid":
         ObjType[0] = "UK IP Parrotfish"
         button_toggle_obj_type.configure(text="UK IP Parrotfish")
+    elif ObjType[0] == "UK IP Parrotfish":
+        ObjType[0] = "Unicornfish"
+        button_toggle_obj_type.configure(text="Unicornfish")
     else:
-        ObjType[0] = "C. striatus + A. nigrofuscus"
-        button_toggle_obj_type.configure(text="C. striatus + A. nigrofuscus")
+        ObjType[0] = "C. sordidus + S. psittacus IP"
+        button_toggle_obj_type.configure(text="C. sordidus + S. psittacus IP")
 
 
 # Import Previous Annotations Function
@@ -855,7 +855,7 @@ def update_special_frame_start():
 
 button_toggle_obj_type = ctk.CTkButton(
     frame_controls,
-    text="C. striatus + A. nigrofuscus",
+    text="C. sordidus + S. psittacus IP",
     command=toggle_obj_type, height = 15
 )
 button_toggle_obj_type.pack(pady=5)
