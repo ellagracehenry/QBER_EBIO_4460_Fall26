@@ -15,7 +15,7 @@ from collections import OrderedDict
 current_frame_index = [0]
 xLocation = [0]
 yLocation = [0]
-ClickType = [1]  # Default to positive click (1)
+ClickType = [1]  # Default to normal bite (1)
 ObjID = [0]
 paused = [False]
 playing_task = None
@@ -409,16 +409,13 @@ def on_double_click(event):
         edit_selected()  # reuse your existing function
 
 # Toggle Click Type
-# def toggle_click_type():
-#     if ClickType[0] == 1:
-#         ClickType[0] = 0
-#         button_toggle_click.configure(text="Negative Click")
-#     elif ClickType[0] == 0:
-#         ClickType[0] = 2
-#         button_toggle_click.configure(text="Bite")
-#     else:
-#         ClickType[0] = 1
-#         button_toggle_click.configure(text="Positive Click")
+def toggle_click_type():
+    if ClickType[0] == 1:
+        ClickType[0] = 0
+        button_toggle_click.configure(text="Occluded bite")
+    else:
+        ClickType[0] = 1
+        button_toggle_click.configure(text="Visible bite")
 
 # Toggle Fish Family
 def toggle_obj_type():
@@ -596,7 +593,7 @@ def save_annotations():
     #    a for a in annotations if a["ClickType"] in [0, 1, 3, 4]
     #]
     bite_annotations = [
-        a for a in annotations if a["ClickType"] == 1
+        a for a in annotations if a["ClickType"] in [0,1]
     ]
 
     msg = f"File(s) saved in {save_dir}. "
@@ -850,8 +847,8 @@ def update_special_frame_start():
 #button_set_special_frame = ctk.CTkButton(frame_controls, text="Set SAM2 Frame", command=update_special_frame_start, height = 15)
 #button_set_special_frame.pack(pady=5)
 
-#button_toggle_click = ctk.CTkButton(frame_controls, text="Bite", command=toggle_click_type, height = 15)
-#button_toggle_click.pack(pady=5)
+button_toggle_click = ctk.CTkButton(frame_controls, text="Visible bite", command=toggle_click_type, height = 15)
+button_toggle_click.pack(pady=5)
 
 button_toggle_obj_type = ctk.CTkButton(
     frame_controls,
